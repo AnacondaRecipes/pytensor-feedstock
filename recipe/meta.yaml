@@ -40,7 +40,7 @@ outputs:
         - numpy
         - versioneer 0.28
         - tomli
-        - setuptools
+        - setuptools >=48.0.0
       run:
         - python
         # Ref: <https://github.com/pymc-devs/pytensor/blob/rel-{{ version }}/setup.py>
