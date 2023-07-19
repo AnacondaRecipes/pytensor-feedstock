@@ -37,6 +37,7 @@ outputs:
         - versioneer 0.28
         - tomli
         - setuptools >=48.0.0
+        - wheel
       run:
         - python
         - {{ pin_compatible("numpy") }}
@@ -47,7 +48,6 @@ outputs:
         - miniKanren
         - cons
         - typing_extensions
-        - setuptools >=48.0.0
     test:
       imports:
         - pytensor
@@ -71,6 +71,8 @@ outputs:
         - {{ compiler('cxx') }}
       host:
         - python
+        - setuptools >=48.0.0
+        - wheel
       run:
         - python
         - {{ pin_subpackage('pytensor-base', exact=True) }}
@@ -110,8 +112,15 @@ outputs:
 about:
   home: https://github.com/pymc-devs/pytensor
   license: BSD-3-Clause
-  summary: An optimizing compiler for evaluating mathematical expressions.
+  license_family: BSD
   license_file: LICENSE.txt
+  summary: An optimizing compiler for evaluating mathematical expressions.
+  description: |
+    PyTensor is a Python library that allows you to define, optimize/rewrite, and evaluate mathematical expressions
+    involving multi-dimensional arrays efficiently.
+Some of PyTensor’s features are:
+
+Tight integration with NumPy
   dev_url: https://github.com/pymc-devs/pytensor/
   doc_url: https://pytensor.readthedocs.io/en/latest/
 
@@ -121,3 +130,5 @@ extra:
     - maresb
     - michaelosthege
     - twiecki
+  skip-lints:
+    - host_section_needs_exact_pinnings
