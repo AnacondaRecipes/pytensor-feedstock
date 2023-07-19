@@ -33,7 +33,6 @@ outputs:
         - tomli                                  # [build_platform != target_platform]
         - setuptools >=48.0.0                    # [build_platform != target_platform]
       host:
-        - pip
         - python
         - cython
         # Allow numpy pinnings to be managed by conda-forge global dependencies
