@@ -20,11 +20,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - python
-    - numpy {{ numpy }}
-    - versioneer 0.28
-    - tomli
-    - setuptools >=48.0.0
   host:
     - python
     - cython
