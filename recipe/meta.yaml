@@ -52,6 +52,8 @@ requirements:
     - miniKanren
     - cons
     - typing_extensions
+    - mkl-service  # [linux64 or win64 or (osx and not arm64)]
+    - openblas     # [not (linux64 or win64 or (osx and not arm64))]
 
 test:
   imports:
