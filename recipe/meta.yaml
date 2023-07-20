@@ -10,7 +10,7 @@ source:
   sha256: fa82d29ef0594e0a2751eaad40882dcd6af51333c28be0d79c1d0de9f3a81a86
 
 build:
-  number: 4
+  number: 0
   script:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
@@ -56,6 +56,7 @@ requirements:
 test:
   imports:
     - pytensor
+    - pytensor.configdefaults
   commands:
     - pytensor-cache help
     - pip check
