@@ -24,7 +24,6 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - python
-        - cython
         - numpy {{ numpy }}
         - versioneer 0.28
         - tomli
