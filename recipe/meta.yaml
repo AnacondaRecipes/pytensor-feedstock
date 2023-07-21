@@ -1,12 +1,12 @@
 {% set version = "2.12.3" %}
+{% set name = "pytensor" %}
 
 package:
-  # https://github.com/conda/conda-build/issues/3933
-  name: pytensor-suite
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/p/pytensor/pytensor-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: fa82d29ef0594e0a2751eaad40882dcd6af51333c28be0d79c1d0de9f3a81a86
 
 build:
