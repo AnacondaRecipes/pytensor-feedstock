@@ -47,6 +47,7 @@ requirements:
     - miniKanren
     - cons
     - typing_extensions
+    - setuptools >=48.0.0
     - mkl-service  # [not ((osx and x86_64) or linux and (aarch64 or ppc64le))]
     - openblas     # [(osx and x86_64) or linux and (aarch64 or ppc64le)]
 
