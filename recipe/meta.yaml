@@ -55,15 +55,23 @@ test:
   imports:
     - pytensor
     - pytensor.configdefaults
+  requires:
+    - pip
+    - pytest
+    - pre-commit
+    - pytest-cov >=2.6.1
+    - coverage >=5.1
+    - pytest-benchmark
+  source_files:
+    - tests
+  files:
+    - check-for-warnings.py
+    - allowed-warnings-base.txt
   commands:
     - pytensor-cache help
     - pip check
     - python check-for-warnings.py allowed-warnings-base.txt
-  requires:
-    - pip
-  files:
-    - check-for-warnings.py
-    - allowed-warnings-base.txt
+    - python -m pytest tests/test_updates.py
 
 about:
   home: https://github.com/pymc-devs/pytensor
