@@ -44,7 +44,7 @@ requirements:
     - wheel
   run:
     - python
-    - {{ pin_compatible("numpy") }}
+    - {{ pin_compatible('numpy') }}
     - scipy >=0.14
     - filelock
     - etuples
