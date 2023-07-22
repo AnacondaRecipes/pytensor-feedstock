@@ -48,8 +48,6 @@ requirements:
     - cons
     - typing_extensions
     - setuptools >=48.0.0
-    - mkl {{ mkl }}            # [blas_impl == "mkl"]
-    - openblas {{ openblas }}  # [blas_impl == 'openblas']
 
 test:
   imports:
