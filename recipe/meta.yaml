@@ -6,7 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  git_url: https://github.com/pymc-devs/pytensor.git
+  git_rev: rel-2.13.1
   sha256: 2f704509abe811f9bca392b6848b1ed5b5011210fc19fd67d17e53f7f7362637
 
 build:
