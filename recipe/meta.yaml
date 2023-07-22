@@ -56,10 +56,11 @@ test:
   requires:
     - pip
     - pytest
-    - pre-commit
-    - pytest-cov >=2.6.1
-    - coverage >=5.1
-    - pytest-benchmark
+    # TODO: enable these when figuring out how to fetch upstream GH repo
+    # - pre-commit
+    # - pytest-cov >=2.6.1
+    # - coverage >=5.1
+    # - pytest-benchmark
   source_files:
     - tests
   files:
@@ -69,7 +70,9 @@ test:
     - pytensor-cache help
     - pip check
     - python check-for-warnings.py allowed-warnings-base.txt
-    - python -m pytest tests/test_updates.py tests/test_breakpoint.py
+    # TODO: enable these when figuring out how to fetch upstream GH repo
+    #- python -m pytest tests/test_*.py
+    - python -m pytest tests/test_updates.py
 
 about:
   home: https://github.com/pymc-devs/pytensor
