@@ -69,7 +69,7 @@ test:
     - pytensor-cache help
     - pip check
     - python check-for-warnings.py allowed-warnings-base.txt
-    - python -m pytest tests/test_updates.py
+    - python -m pytest tests/test_updates.py tests/test_breakpoint.py
 
 about:
   home: https://github.com/pymc-devs/pytensor
