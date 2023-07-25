@@ -30,10 +30,7 @@ requirements:
     - versioneer 0.28
     - tomli
     - setuptools >=48.0.0
-    # mkl-service is only available for linux-64, win-64, and osx-64.
-    # For everything else, use openblas.
-    - mkl {{ mkl }}            # [blas_impl == "mkl"]
-    - openblas {{ openblas }}  # [blas_impl == 'openblas']
+    - openblas {{ openblas }}
     # We also need the "blas" package. Otherwise we get reports
     # of "cblas.h: No such file or directory" at import time.
     # Ref: <https://github.com/conda-forge/aesara-feedstock/issues/80>
