@@ -70,7 +70,7 @@ about:
   home: https://github.com/pymc-devs/pytensor
   license: BSD-3-Clause
   license_family: BSD
-  license_file: LICENSE.txt
+  license_file: doc/LICENSE.txt
   summary: An optimizing compiler for evaluating mathematical expressions.
   description: |
     PyTensor is a Python library that allows you to define, optimize/rewrite, and evaluate mathematical expressions
