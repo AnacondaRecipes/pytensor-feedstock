@@ -6,9 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  git_url: https://github.com/pymc-devs/{{ name }}.git
-  git_rev: rel-{{ version }}
-  sha256: 2f704509abe811f9bca392b6848b1ed5b5011210fc19fd67d17e53f7f7362637
+  url: https://github.com/pymc-devs/pytensor/archive/refs/tags/rel-2.13.1.tar.gz
+  sha256: 468eb208e5a9fe62530752a354f48f739442b45811797e084ea432809ca5f99c
 
 build:
   number: 0
