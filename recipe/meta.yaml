@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 468eb208e5a9fe62530752a354f48f739442b45811797e084ea432809ca5f99c
+  sha256: a1c436c67376436d2030742434cae7ff450a07c207c352f26ac958b0fb60142e
 
 build:
   number: 0
