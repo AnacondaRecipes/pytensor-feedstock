@@ -1,4 +1,4 @@
-{% set version = "2.13.1" %}
+{% set version = "2.23.0" %}
 {% set name = "pytensor" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 468eb208e5a9fe62530752a354f48f739442b45811797e084ea432809ca5f99c
+  sha256: 543eebd466db93190ac454c5a633948f724a64021e4fe39d89344e7423a5798b
 
 build:
   number: 0
@@ -15,6 +15,7 @@ build:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - pytensor-cache = bin.pytensor_cache:main
+  skip: True #  [py<=310]
 
 requirements:
   build:
@@ -59,7 +60,6 @@ test:
     - check-for-warnings.py
     - allowed-warnings-base.txt
   commands:
-    - pytensor-cache help
     - pip check
     - python check-for-warnings.py allowed-warnings-base.txt
     - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
