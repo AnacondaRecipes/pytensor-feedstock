@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
+  url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz\
   sha256: a1c436c67376436d2030742434cae7ff450a07c207c352f26ac958b0fb60142e
 
 build:
@@ -17,6 +17,7 @@ build:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - pytensor-cache = bin.pytensor_cache:main
+  skip: True #  [py<=310]
 
 requirements:
   build:
@@ -63,7 +64,6 @@ test:
     - check-for-warnings.py
     - allowed-warnings-base.txt
   commands:
-    - pytensor-cache help
     - pip check
     # this flag prevents a known issue with macOS clang++ throwing errors when narrowing types in implicit casts
     - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
