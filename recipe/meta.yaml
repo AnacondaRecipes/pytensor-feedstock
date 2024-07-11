@@ -61,6 +61,7 @@ test:
     - allowed-warnings-base.txt
   commands:
     - pip check
+    - pytensor-cache help
     - python check-for-warnings.py allowed-warnings-base.txt
     - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
     - python -m pytest tests/test_printing.py  # [osx]
@@ -75,7 +76,7 @@ about:
     PyTensor is a Python library that allows you to define, optimize/rewrite, and evaluate mathematical expressions
     involving multi-dimensional arrays efficiently.
   dev_url: https://github.com/pymc-devs/pytensor/
-  doc_url: https://pytensor.readthedocs.io/en/latest/
+  doc_url: https://pytensor.readthedocs.io
 
 extra:
   recipe-maintainers:
@@ -86,4 +87,3 @@ extra:
   skip-lints:
     - host_section_needs_exact_pinnings
     - python_build_tool_in_run
-    - documentation_specifies_language
