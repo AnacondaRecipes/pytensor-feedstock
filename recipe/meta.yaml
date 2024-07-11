@@ -14,7 +14,7 @@ build:
   script:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
-    - pytensor-cache = bin.pytensor_cache:main
+    - pytensor-cache = pytensor.bin.pytensor_cache:main
   skip: True #  [py<=310]
 
 requirements:
