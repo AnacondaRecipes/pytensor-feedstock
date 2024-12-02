@@ -44,6 +44,7 @@ requirements:
     - cons
     - typing_extensions
     - setuptools >=48.0.0
+    # necessary to compile code at runtime
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
 
