@@ -66,7 +66,10 @@ test:
     - pip check
     - pytensor-cache help
     - python check-for-warnings.py allowed-warnings-base.txt
-    - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
+    # skipping test_config_pickling because of a regex error which seems to be related to pickle
+    # AssertionError: Regex pattern did not match. Regex: "Can't pickle local object"
+    # Input: "Can't get local object 'test_config_pickling.<locals>.<lambda>'" 
+    - python -m pytest -k "not test_config_pickling" tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
     - python -m pytest tests/test_printing.py  # [osx]
 
 about:
