@@ -69,6 +69,7 @@ test:
     # this flag prevents a known issue with macOS clang++ throwing errors when narrowing types in implicit casts
     - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
     - python check-for-warnings.py allowed-warnings-base.txt
+    - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
     # skipping test_config_pickling because of a regex error which seems to be related to pickle
     # AssertionError: Regex pattern did not match. Regex: "Can't pickle local object"
     # Input: "Can't get local object 'test_config_pickling.<locals>.<lambda>'" 
