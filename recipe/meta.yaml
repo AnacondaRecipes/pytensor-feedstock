@@ -54,9 +54,6 @@ test:
     - pip
     - pytest
     - pre-commit
-    - pytest-cov >=2.6.1
-    - coverage >=5.1
-    - pytest-benchmark
   source_files:
     - tests
   files:
