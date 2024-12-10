@@ -10,7 +10,7 @@ source:
   sha256: a1c436c67376436d2030742434cae7ff450a07c207c352f26ac958b0fb60142e
 
 build:
-  number: 0
+  number: 1
   script:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
@@ -41,6 +41,8 @@ requirements:
     - cons
     - typing_extensions
     - setuptools >=48.0.0
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
 
 test:
   imports:
