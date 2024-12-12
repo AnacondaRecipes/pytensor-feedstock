@@ -11,6 +11,8 @@ source:
 
 build:
   number: 1
+  # skip py312 because of numpy 1.26 incompatibility
+  skip: True  # [py>311]
   script:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
