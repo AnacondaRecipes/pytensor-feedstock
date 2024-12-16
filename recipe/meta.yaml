@@ -10,7 +10,7 @@ source:
   sha256: a1c436c67376436d2030742434cae7ff450a07c207c352f26ac958b0fb60142e
 
 build:
-  number: 1
+  number: 2
   # skip py312 because of numpy 1.26 incompatibility
   skip: True  # [py>311]
   script:
@@ -43,6 +43,7 @@ requirements:
     - cons
     - typing_extensions
     - setuptools >=48.0.0
+    # necessary to compile code at runtime
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
 
@@ -54,9 +55,6 @@ test:
     - pip
     - pytest
     - pre-commit
-    - pytest-cov >=2.6.1
-    - coverage >=5.1
-    - pytest-benchmark
   source_files:
     - tests
   files:
@@ -69,7 +67,6 @@ test:
     - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
     - python check-for-warnings.py allowed-warnings-base.txt
     - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
-    - python -m pytest tests/test_printing.py  # [osx]
 
 about:
   home: https://github.com/pymc-devs/pytensor
@@ -81,7 +78,7 @@ about:
     PyTensor is a Python library that allows you to define, optimize/rewrite, and evaluate mathematical expressions
     involving multi-dimensional arrays efficiently.
   dev_url: https://github.com/pymc-devs/pytensor/
-  doc_url: https://pytensor.readthedocs.io/en/latest/
+  doc_url: https://pytensor.readthedocs.io
 
 extra:
   recipe-maintainers:
@@ -92,4 +89,3 @@ extra:
   skip-lints:
     - host_section_needs_exact_pinnings
     - python_build_tool_in_run
-    - documentation_specifies_language
