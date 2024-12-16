@@ -10,7 +10,9 @@ source:
   sha256: a1c436c67376436d2030742434cae7ff450a07c207c352f26ac958b0fb60142e
 
 build:
-  number: 0
+  number: 1
+  # skip py312 because of numpy 1.26 incompatibility
+  skip: True  # [py>311]
   script:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
@@ -32,7 +34,7 @@ requirements:
     - wheel
   run:
     - python
-    - {{ pin_compatible('numpy') }}
+    - {{ pin_compatible('numpy', upper_bound='1.26') }}
     - scipy >=0.14
     - filelock
     - etuples
@@ -41,6 +43,8 @@ requirements:
     - cons
     - typing_extensions
     - setuptools >=48.0.0
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
 
 test:
   imports:
@@ -61,6 +65,8 @@ test:
   commands:
     - pytensor-cache help
     - pip check
+    # this flag prevents a known issue with macOS clang++ throwing errors when narrowing types in implicit casts
+    - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
     - python check-for-warnings.py allowed-warnings-base.txt
     - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
     - python -m pytest tests/test_printing.py  # [osx]
