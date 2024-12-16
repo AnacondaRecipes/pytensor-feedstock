@@ -10,9 +10,7 @@ source:
   sha256: a1c436c67376436d2030742434cae7ff450a07c207c352f26ac958b0fb60142e
 
 build:
-  number: 1
-  # skip py312 because of numpy 1.26 incompatibility
-  skip: True  # [py>311]
+  number: 2
   script:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
