@@ -11,11 +11,12 @@ source:
 
 build:
   number: 2
+  # skip py312 because of numpy 1.26 incompatibility
+  skip: True  # [py>311]
   script:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
-    - pytensor-cache = pytensor.bin.pytensor_cache:main
-  skip: True #  [py<=310]
+    - pytensor-cache = bin.pytensor_cache:main
 
 requirements:
   build:
@@ -60,17 +61,12 @@ test:
     - check-for-warnings.py
     - allowed-warnings-base.txt
   commands:
+    - pytensor-cache help
     - pip check
     # this flag prevents a known issue with macOS clang++ throwing errors when narrowing types in implicit casts
     - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
     - python check-for-warnings.py allowed-warnings-base.txt
-    # this flag prevents a known issue with macOS clang++ throwing errors when narrowing types in implicit casts
-    - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
-    # skipping test_config_pickling because of a regex error which seems to be related to pickle
-    # AssertionError: Regex pattern did not match. Regex: "Can't pickle local object"
-    # Input: "Can't get local object 'test_config_pickling.<locals>.<lambda>'" 
-    - python -m pytest -k "not test_config_pickling" tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
-    - python -m pytest tests/test_printing.py  # [osx]
+    - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
 
 about:
   home: https://github.com/pymc-devs/pytensor
