@@ -19,6 +19,9 @@ build:
   skip: True  # [py<310 or py>=314]
   # skip py312 because of numpy 1.26 incompatibility
   #skip: True  # [py>311]
+  ignore_run_exports:
+    - libstdcxx-ng
+    - numpy
 
 requirements:
   build:
