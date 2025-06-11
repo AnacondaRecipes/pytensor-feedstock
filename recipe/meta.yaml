@@ -30,7 +30,7 @@ requirements:
     - cython
     - pip
     - numpy {{ numpy }}
-    - versioneer 0.28
+    - versioneer 0.29
     - tomli
     - setuptools >=59.0.0
     - wheel
@@ -48,7 +48,6 @@ requirements:
     # necessary to compile code at runtime
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-      run:
 
 test:
   imports:
