@@ -7,7 +7,9 @@ package:
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 543eebd466db93190ac454c5a633948f724a64021e4fe39d89344e7423a5798b
+  sha256: 34210e120808f811b582ff1963667590f67b04af2a89bcdb611cd1438bf4c41b
+  patches:
+    - 0001-patch-pyproject.toml.patch
 
 build:
   number: 0
@@ -28,6 +30,8 @@ requirements:
     - git  # [not win]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - patch     # [not win]
+    - m2-patch  # [win]
   host:
     - python
     - cython
