@@ -1,4 +1,4 @@
-{% set version = "2.23.0" %}
+{% set version = "2.31.3" %}
 {% set name = "pytensor" %}
 
 package:
@@ -10,12 +10,15 @@ source:
   sha256: 543eebd466db93190ac454c5a633948f724a64021e4fe39d89344e7423a5798b
 
 build:
-  number: 1
+  number: 0
   script:
     - python -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - pytensor-cache = pytensor.bin.pytensor_cache:main
-  skip: True #  [py<=310]
+  # upstream requirement
+  skip: True  # [py<310 or py>=314]
+  # skip py312 because of numpy 1.26 incompatibility
+  #skip: True  # [py>311]
 
 requirements:
   build:
@@ -29,22 +32,23 @@ requirements:
     - numpy {{ numpy }}
     - versioneer 0.28
     - tomli
-    - setuptools >=48.0.0
+    - setuptools >=59.0.0
     - wheel
   run:
     - python
-    - {{ pin_compatible('numpy') }}
-    - scipy >=0.14
-    - filelock
+    - numpy >=1.17.0
+    - scipy >=1,<2
+    - filelock >=3.15
     - etuples
     - logical-unification
     - miniKanren
     - cons
     - typing_extensions
-    - setuptools >=48.0.0
+    - setuptools >=59.0.0
     # necessary to compile code at runtime
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+      run:
 
 test:
   imports:
@@ -80,7 +84,7 @@ about:
   description: |
     PyTensor is a Python library that allows you to define, optimize/rewrite, and evaluate mathematical expressions
     involving multi-dimensional arrays efficiently.
-  dev_url: https://github.com/pymc-devs/pytensor/
+  dev_url: https://github.com/pymc-devs/pytensor
   doc_url: https://pytensor.readthedocs.io
 
 extra:
