@@ -1,0 +1,26 @@
+From 1ed850a8123eb62f1392a4b8b6a613d7c69e1351 Mon Sep 17 00:00:00 2001
+From: Jack Olivieri <jolivieri@anaconda.com>
+Date: Wed, 11 Jun 2025 16:21:34 +0200
+Subject: [PATCH] patch pyproject.toml
+
+---
+ pyproject.toml | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/pyproject.toml b/pyproject.toml
+index 9a7827d83..39b62e53a 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -14,8 +14,7 @@ requires-python = ">=3.10,<3.14"
+ authors = [{ name = "pymc-devs", email = "pymc.devs@gmail.com" }]
+ description = "Optimizing compiler for evaluating mathematical expressions on CPUs and GPUs."
+ readme = "README.rst"
+-license = "BSD-3-Clause"
+-license-files = ["LICENSE.txt"]
++license = { file = "LICENSE.txt" }
+ classifiers = [
+     "Development Status :: 6 - Mature",
+     "Intended Audience :: Education",
+-- 
+2.39.5 (Apple Git-154)
+
