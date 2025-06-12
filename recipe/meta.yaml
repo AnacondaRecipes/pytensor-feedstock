@@ -25,7 +25,7 @@ build:
 
 requirements:
   build:
-    - git  # [not win]
+    - git  # [linux]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - patch     # [not win]
