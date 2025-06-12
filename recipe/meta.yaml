@@ -35,7 +35,9 @@ requirements:
     - cython
     - pip
     - numpy {{ numpy }}
+    # versioneer[toml]==0.29
     - versioneer 0.29
+    - toml
     - tomli
     - setuptools >=59.0.0
     - wheel
