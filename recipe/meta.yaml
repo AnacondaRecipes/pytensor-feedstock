@@ -21,7 +21,6 @@ build:
   skip: True  # [py<310 or py>=314]
   ignore_run_exports:
     - libstdcxx-ng
-    - numpy
 
 requirements:
   build:
