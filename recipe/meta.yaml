@@ -286,6 +286,7 @@ test:
     - pip
     - pytest
     - pre-commit
+    - jax
   source_files:
     - tests
   files:
