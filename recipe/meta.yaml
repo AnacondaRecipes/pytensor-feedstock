@@ -286,6 +286,7 @@ test:
     - pytest
     - pre-commit
     - jax
+    - numba
   source_files:
     - tests
   files:
