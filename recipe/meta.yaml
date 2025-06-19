@@ -19,8 +19,6 @@ build:
     - pytensor-cache = pytensor.bin.pytensor_cache:main
   # upstream requirement
   skip: True  # [py<310 or py>=314]
-  ignore_run_exports:
-    - libstdcxx-ng
 
 requirements:
   build:
