@@ -66,10 +66,25 @@ test:
   imports:
     - pytensor
     - pytensor.compile
-    - pytensor.compile
+    - pytensor.compile.builders
+    - pytensor.compile.compiledir
+    - pytensor.compile.compilelock
+    - pytensor.compile.debugmode
+    - pytensor.compile.function
+    - pytensor.compile.function.pfunc
+    - pytensor.compile.function.types
+    - pytensor.compile.io
+    - pytensor.compile.mode
+    - pytensor.compile.monitormode
+    - pytensor.compile.nanguardmode
+    - pytensor.compile.ops
+    - pytensor.compile.profiling
+    - pytensor.compile.sharedvalue
     - pytensor.configdefaults
     - pytensor.configparser
     - pytensor.d3viz
+    - pytensor.d3viz.d3viz
+    - pytensor.d3viz.formatting
     - pytensor.gradient
     - pytensor.graph
     - pytensor.graph.basic
@@ -115,7 +130,6 @@ test:
     - pytensor.sparse.type
     - pytensor.sparse.utils
     - pytensor.tensor
-    - pytensor.tensor._linalg
     - pytensor.tensor._linalg
     - pytensor.tensor.basic
     - pytensor.tensor.blas
