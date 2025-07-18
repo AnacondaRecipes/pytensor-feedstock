@@ -59,6 +59,9 @@ requirements:
     # numba
     - numba >=0.57
 
+# E   fixture 'benchmark' not found
+{% set deselect_tests = " --deselect=tests/test_gradient.py::TestJacobian::test_benchmark" %}
+
 test:
   imports:
     - pytensor
@@ -166,7 +169,7 @@ test:
     - python check-for-warnings.py allowed-warnings-base.txt
     # this flag prevents a known issue with macOS clang++ throwing errors when narrowing types in implicit casts
     - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
-    - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
+    - python -m pytest {{ deselect_tests }} tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
 
 about:
   home: https://github.com/pymc-devs/pytensor
