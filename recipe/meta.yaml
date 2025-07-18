@@ -1,13 +1,13 @@
-{% set version = "2.31.3" %}
 {% set name = "pytensor" %}
+{% set version = "2.31.7" %}
 
 package:
-  name: {{ name }}
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 34210e120808f811b582ff1963667590f67b04af2a89bcdb611cd1438bf4c41b
+  sha256: 41b89de1c20adb04381c61b22527ddc11d401d83c276c050427a12676b5c4dbe
   patches:
     - 0001-patch-pyproject.toml.patch
 
@@ -34,7 +34,6 @@ requirements:
     - numpy {{ numpy }}
     # versioneer[toml]==0.29
     - versioneer 0.29
-    - toml
     - tomli
     - setuptools >=59.0.0
     - wheel
