@@ -1,5 +1,5 @@
 {% set name = "pytensor" %}
-{% set version = "2.31.7" %}
+{% set version = "2.36.0" %}
 
 package:
   name: {{ name|lower }}
@@ -18,7 +18,7 @@ build:
   entry_points:
     - pytensor-cache = pytensor.bin.pytensor_cache:main
   # upstream requirement
-  skip: true  # [py<310 or py>=314]
+  skip: true  # [py<310 or py>=315]
 
 requirements:
   build:
@@ -38,8 +38,9 @@ requirements:
     - wheel
   run:
     - python
-    - numpy >=1.17.0
+    - numpy >=2.0
     - scipy >=1,<2
+    - numba >=0.57,<1
     - filelock >=3.15
     - etuples
     - logical-unification
@@ -52,8 +53,6 @@ requirements:
   run_constrained:
     # rtd
     - sphinx >=5.1.0,<6
-    # numba
-    - numba >=0.57
 
 # E   fixture 'benchmark' not found
 {% set deselect_tests = " --deselect=tests/test_gradient.py::TestJacobian::test_benchmark" %}
@@ -166,8 +165,6 @@ test:
     - pytest
     - pre-commit
     - jax
-    - numba
-    - pytorch
   source_files:
     - tests
   files:
