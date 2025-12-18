@@ -1,6 +1,5 @@
 {% set name = "pytensor" %}
 {% set version = "2.31.7" %}
-{% set deselect_tests = " --deselect=tests/test_gradient.py::TestJacobian::test_benchmark" %}
 
 package:
   name: {{ name|lower }}
@@ -24,6 +23,7 @@ build:
 requirements:
   build:
     - git  # [linux]
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -56,6 +56,8 @@ requirements:
     - numba >=0.57
 
 # E   fixture 'benchmark' not found
+{% set deselect_tests = " --deselect=tests/test_gradient.py::TestJacobian::test_benchmark" %}
+
 test:
   imports:
     - pytensor
