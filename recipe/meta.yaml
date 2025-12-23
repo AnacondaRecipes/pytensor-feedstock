@@ -1,5 +1,5 @@
 {% set name = "pytensor" %}
-{% set version = "2.31.7" %}
+{% set version = "2.36.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 41b89de1c20adb04381c61b22527ddc11d401d83c276c050427a12676b5c4dbe
+  sha256: cfb4489a7f651f1b507342d8fdb41a41defa020399916680863bd45e7bfb8d37
   patches:
     - 0001-patch-pyproject.toml.patch
 
@@ -18,15 +18,14 @@ build:
   entry_points:
     - pytensor-cache = pytensor.bin.pytensor_cache:main
   # upstream requirement
-  skip: True  # [py<310 or py>=314]
+  skip: true  # [py<311 or py>=315]
 
 requirements:
   build:
     - git  # [linux]
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - patch     # [not win]
-    - m2-patch  # [win]
   host:
     - python
     - cython
@@ -39,8 +38,9 @@ requirements:
     - wheel
   run:
     - python
-    - numpy >=1.17.0
+    - numpy >=2.0
     - scipy >=1,<2
+    - numba >=0.57,<1
     - filelock >=3.15
     - etuples
     - logical-unification
@@ -53,8 +53,6 @@ requirements:
   run_constrained:
     # rtd
     - sphinx >=5.1.0,<6
-    # numba
-    - numba >=0.57
 
 # E   fixture 'benchmark' not found
 {% set deselect_tests = " --deselect=tests/test_gradient.py::TestJacobian::test_benchmark" %}
@@ -132,7 +130,6 @@ test:
     - pytensor.tensor.blas
     - pytensor.tensor.blas_c
     - pytensor.tensor.blas_headers
-    - pytensor.tensor.blas_scipy
     - pytensor.tensor.blockwise
     - pytensor.tensor.einsum
     - pytensor.tensor.elemwise
@@ -140,7 +137,6 @@ test:
     - pytensor.tensor.extra_ops
     - pytensor.tensor.functional
     - pytensor.tensor.interpolate
-    - pytensor.tensor.io
     - pytensor.tensor.math
     - pytensor.tensor.nlinalg
     - pytensor.tensor.pad
@@ -166,9 +162,8 @@ test:
     - pip
     - pytest
     - pre-commit
-    - jax
-    - numba
-    - pytorch
+    # jax is not available for Python 3.14 on the main channel.
+    - jax  # [py<314]
   source_files:
     - tests
   files:
