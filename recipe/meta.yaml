@@ -1,5 +1,5 @@
 {% set name = "pytensor" %}
-{% set version = "2.36.0" %}
+{% set version = "2.36.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 11c845f25de0f1840bc199c1df4c533f9a57d2f525d42f80c2733748a4ddcff9
+  sha256: cfb4489a7f651f1b507342d8fdb41a41defa020399916680863bd45e7bfb8d37
   patches:
     - 0001-patch-pyproject.toml.patch
 
@@ -18,7 +18,7 @@ build:
   entry_points:
     - pytensor-cache = pytensor.bin.pytensor_cache:main
   # upstream requirement
-  skip: true  # [py<310 or py>=315]
+  skip: true  # [py<311 or py>=315]
 
 requirements:
   build:
@@ -130,7 +130,6 @@ test:
     - pytensor.tensor.blas
     - pytensor.tensor.blas_c
     - pytensor.tensor.blas_headers
-    - pytensor.tensor.blas_scipy
     - pytensor.tensor.blockwise
     - pytensor.tensor.einsum
     - pytensor.tensor.elemwise
@@ -138,7 +137,6 @@ test:
     - pytensor.tensor.extra_ops
     - pytensor.tensor.functional
     - pytensor.tensor.interpolate
-    - pytensor.tensor.io
     - pytensor.tensor.math
     - pytensor.tensor.nlinalg
     - pytensor.tensor.pad
@@ -164,7 +162,8 @@ test:
     - pip
     - pytest
     - pre-commit
-    - jax
+    # jax is not available for Python 3.14 on the main channel.
+    - jax  # [py<314]
   source_files:
     - tests
   files:
