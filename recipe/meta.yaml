@@ -1,5 +1,5 @@
 {% set name = "pytensor" %}
-{% set version = "2.36.1" %}
+{% set version = "2.38.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,7 @@ package:
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: cfb4489a7f651f1b507342d8fdb41a41defa020399916680863bd45e7bfb8d37
-  patches:
-    - 0001-patch-pyproject.toml.patch
+  sha256: 0a37334a47639ba12621a874b580ebc5256b3d3049ae95545274ccede1e0157a
 
 build:
   number: 0
@@ -33,14 +31,14 @@ requirements:
     - numpy {{ numpy }}
     # versioneer[toml]==0.29
     - versioneer 0.29
-    - tomli
+    - tomli 2.2.1
     - setuptools >=59.0.0
     - wheel
   run:
     - python
     - numpy >=2.0
     - scipy >=1,<2
-    - numba >=0.57,<1
+    - numba >0.57,<1
     - filelock >=3.15
     - etuples
     - logical-unification
@@ -48,8 +46,8 @@ requirements:
     - cons
     - setuptools >=59.0.0
     # necessary to compile code at runtime
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - c-compiler
+    - cxx-compiler
   run_constrained:
     # rtd
     - sphinx >=5.1.0,<6
@@ -162,8 +160,7 @@ test:
     - pip
     - pytest
     - pre-commit
-    # jax is not available for Python 3.14 on the main channel.
-    - jax  # [py<314]
+    - jax
   source_files:
     - tests
   files:
@@ -196,6 +193,5 @@ extra:
     - michaelosthege
     - twiecki
   skip-lints:
-    - host_section_needs_exact_pinnings
     - python_build_tool_in_run
-    - compilers_must_be_in_build
+    - python_build_tools_in_host
