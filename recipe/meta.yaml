@@ -1,3 +1,4 @@
+# Dependency chain order: pytensor -> pymc -> pymc-extras
 {% set name = "pytensor" %}
 {% set version = "3.0.4" %}
 
@@ -31,7 +32,7 @@ requirements:
     - numpy {{ numpy }}
     # versioneer[toml]==0.29
     - versioneer 0.29
-    - tomli 2.2.1
+    - tomli >=2.2.1
     - setuptools >=59.0.0
     - wheel
   run:
