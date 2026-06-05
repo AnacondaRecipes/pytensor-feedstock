@@ -56,20 +56,21 @@ requirements:
 test:
   imports:
     - pytensor
+    - pytensor.assumptions
     - pytensor.compile
     - pytensor.compile.builders
     - pytensor.compile.compiledir
     - pytensor.compile.compilelock
-    - pytensor.compile.debugmode
-    - pytensor.compile.function
-    - pytensor.compile.function.pfunc
-    - pytensor.compile.function.types
+    - pytensor.compile.debug
+    - pytensor.compile.debug.debugmode
+    - pytensor.compile.debug.monitormode
+    - pytensor.compile.debug.nanguardmode
+    - pytensor.compile.debug.profiling
+    - pytensor.compile.executor
     - pytensor.compile.io
+    - pytensor.compile.maker
     - pytensor.compile.mode
-    - pytensor.compile.monitormode
-    - pytensor.compile.nanguardmode
     - pytensor.compile.ops
-    - pytensor.compile.profiling
     - pytensor.compile.sharedvalue
     - pytensor.configdefaults
     - pytensor.configparser
@@ -92,8 +93,9 @@ test:
     - pytensor.link.basic
     - pytensor.link.c
     - pytensor.link.jax
+    - pytensor.link.mlx
     - pytensor.link.numba
-    - pytensor.link.pytorch
+    - pytensor.link.pytorch.linker
     - pytensor.link.utils
     - pytensor.link.vm
     - pytensor.misc.frozendict
@@ -112,7 +114,6 @@ test:
     - pytensor.scan.checkpoints
     - pytensor.scan.op
     - pytensor.scan.rewriting
-    - pytensor.scan.scan_perform
     - pytensor.scan.utils
     - pytensor.scan.views
     - pytensor.sparse
@@ -121,7 +122,6 @@ test:
     - pytensor.sparse.type
     - pytensor.sparse.utils
     - pytensor.tensor
-    - pytensor.tensor._linalg
     - pytensor.tensor.basic
     - pytensor.tensor.blas
     - pytensor.tensor.blas_c
@@ -133,6 +133,7 @@ test:
     - pytensor.tensor.extra_ops
     - pytensor.tensor.functional
     - pytensor.tensor.interpolate
+    - pytensor.tensor.linalg
     - pytensor.tensor.math
     - pytensor.tensor.nlinalg
     - pytensor.tensor.pad
@@ -152,8 +153,8 @@ test:
     - pytensor.typed_list
     - pytensor.typed_list.basic
     - pytensor.typed_list.type
-    - pytensor.updates
     - pytensor.utils
+    - pytensor.xtensor
   requires:
     - pip
     - pytest
@@ -190,6 +191,3 @@ extra:
     - maresb
     - michaelosthege
     - twiecki
-  skip-lints:
-    - python_build_tool_in_run
-    - python_build_tools_in_host
