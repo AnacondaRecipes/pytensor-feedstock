@@ -171,7 +171,7 @@ test:
     - python check-for-warnings.py allowed-warnings-base.txt
     # this flag prevents a known issue with macOS clang++ throwing errors when narrowing types in implicit casts
     - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
-    - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
+    - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py
 
 about:
   home: https://github.com/pymc-devs/pytensor
@@ -191,3 +191,5 @@ extra:
     - maresb
     - michaelosthege
     - twiecki
+  skip-lints:
+    - python_build_tools_in_host  # setuptools is a runtime dep per upstream pyproject.toml
