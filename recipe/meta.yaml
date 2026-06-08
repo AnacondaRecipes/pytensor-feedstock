@@ -7,8 +7,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 5eba854ff23ae6cd356a12558f9f504406d68d1f8a18f0fa456fb20874744055
+  url: https://pypi.org/packages/source/p/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 9a6a117eb5f73d87d9248bd7266e5b274973660fad699090835c6b92b59f1df0
 
 build:
   number: 0
@@ -32,7 +32,7 @@ requirements:
     - numpy {{ numpy }}
     # versioneer[toml]==0.29
     - versioneer 0.29
-    - tomli >=2.2.1
+    - tomli 2.2.1
     - setuptools >=59.0.0
     - wheel
   run:
