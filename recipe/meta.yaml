@@ -32,6 +32,7 @@ requirements:
     - numpy {{ numpy }}
     # versioneer[toml]==0.29
     - versioneer 0.29
+    # relax the stricter pin on tomli
     - tomli >=2.2.1
     - setuptools >=59.0.0
     - wheel
