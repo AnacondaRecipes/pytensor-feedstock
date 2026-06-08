@@ -1,5 +1,6 @@
+# Dependency chain order: pytensor -> pymc -> pymc-extras
 {% set name = "pytensor" %}
-{% set version = "2.38.2" %}
+{% set version = "3.0.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +8,7 @@ package:
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 0a37334a47639ba12621a874b580ebc5256b3d3049ae95545274ccede1e0157a
+  sha256: 5eba854ff23ae6cd356a12558f9f504406d68d1f8a18f0fa456fb20874744055
 
 build:
   number: 0
@@ -31,14 +32,14 @@ requirements:
     - numpy {{ numpy }}
     # versioneer[toml]==0.29
     - versioneer 0.29
-    - tomli 2.2.1
+    - tomli >=2.2.1
     - setuptools >=59.0.0
     - wheel
   run:
     - python
     - numpy >=2.0
     - scipy >=1,<2
-    - numba >0.57,<1
+    - numba >=0.58,<=0.65.1
     - filelock >=3.15
     - etuples
     - logical-unification
@@ -52,26 +53,24 @@ requirements:
     # rtd
     - sphinx >=5.1.0,<6
 
-# E   fixture 'benchmark' not found
-{% set deselect_tests = " --deselect=tests/test_gradient.py::TestJacobian::test_benchmark" %}
-
 test:
   imports:
     - pytensor
+    - pytensor.assumptions
     - pytensor.compile
     - pytensor.compile.builders
     - pytensor.compile.compiledir
     - pytensor.compile.compilelock
-    - pytensor.compile.debugmode
-    - pytensor.compile.function
-    - pytensor.compile.function.pfunc
-    - pytensor.compile.function.types
+    - pytensor.compile.debug
+    - pytensor.compile.debug.debugmode
+    - pytensor.compile.debug.monitormode
+    - pytensor.compile.debug.nanguardmode
+    - pytensor.compile.debug.profiling
+    - pytensor.compile.executor
     - pytensor.compile.io
+    - pytensor.compile.maker
     - pytensor.compile.mode
-    - pytensor.compile.monitormode
-    - pytensor.compile.nanguardmode
     - pytensor.compile.ops
-    - pytensor.compile.profiling
     - pytensor.compile.sharedvalue
     - pytensor.configdefaults
     - pytensor.configparser
@@ -94,8 +93,9 @@ test:
     - pytensor.link.basic
     - pytensor.link.c
     - pytensor.link.jax
+    - pytensor.link.mlx
     - pytensor.link.numba
-    - pytensor.link.pytorch
+    - pytensor.link.pytorch.linker
     - pytensor.link.utils
     - pytensor.link.vm
     - pytensor.misc.frozendict
@@ -114,7 +114,6 @@ test:
     - pytensor.scan.checkpoints
     - pytensor.scan.op
     - pytensor.scan.rewriting
-    - pytensor.scan.scan_perform
     - pytensor.scan.utils
     - pytensor.scan.views
     - pytensor.sparse
@@ -123,7 +122,6 @@ test:
     - pytensor.sparse.type
     - pytensor.sparse.utils
     - pytensor.tensor
-    - pytensor.tensor._linalg
     - pytensor.tensor.basic
     - pytensor.tensor.blas
     - pytensor.tensor.blas_c
@@ -135,6 +133,7 @@ test:
     - pytensor.tensor.extra_ops
     - pytensor.tensor.functional
     - pytensor.tensor.interpolate
+    - pytensor.tensor.linalg
     - pytensor.tensor.math
     - pytensor.tensor.nlinalg
     - pytensor.tensor.pad
@@ -154,8 +153,8 @@ test:
     - pytensor.typed_list
     - pytensor.typed_list.basic
     - pytensor.typed_list.type
-    - pytensor.updates
     - pytensor.utils
+    - pytensor.xtensor
   requires:
     - pip
     - pytest
@@ -172,7 +171,7 @@ test:
     - python check-for-warnings.py allowed-warnings-base.txt
     # this flag prevents a known issue with macOS clang++ throwing errors when narrowing types in implicit casts
     - export PYTENSOR_FLAGS="gcc__cxxflags=-Wno-c++11-narrowing"  # [osx]
-    - python -m pytest {{ deselect_tests }} tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py tests/test_updates.py
+    - python -m pytest tests/test_breakpoint.py tests/test_config.py tests/test_gradient.py tests/test_ifelse.py tests/test_raise_op.py tests/test_rop.py
 
 about:
   home: https://github.com/pymc-devs/pytensor
@@ -193,5 +192,4 @@ extra:
     - michaelosthege
     - twiecki
   skip-lints:
-    - python_build_tool_in_run
-    - python_build_tools_in_host
+    - python_build_tools_in_host  # setuptools is a runtime dep per upstream pyproject.toml
