@@ -1,6 +1,6 @@
 # Dependency chain order: pytensor -> pymc -> pymc-extras
 {% set name = "pytensor" %}
-{% set version = "3.0.4" %}
+{% set version = "3.3.2" %}
 
 package:
   name: {{ name|lower }}
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 5eba854ff23ae6cd356a12558f9f504406d68d1f8a18f0fa456fb20874744055
+  sha256: 8bea78848359d3c6a22a5c41ca32ebf226bb65e6aae83a866401f2b726035d67
 
 build:
   number: 0
@@ -31,16 +31,16 @@ requirements:
     - pip
     - numpy {{ numpy }}
     # versioneer[toml]==0.29
-    - versioneer 0.29
+    - versioneer ==0.29
     # Relax the stricter pin on tomli
     - tomli >=2.2.1
     - setuptools >=59.0.0
-    - wheel
+    - numpy >=2.0
   run:
     - python
     - numpy >=2.0
     - scipy >=1,<2
-    - numba >=0.58,<=0.65.1
+    - numba >=0.58,<=0.67.0
     - filelock >=3.15
     - etuples
     - logical-unification
@@ -50,6 +50,7 @@ requirements:
     # necessary to compile code at runtime
     - c-compiler
     - cxx-compiler
+    - {{ pin_compatible('numpy') }}
   run_constrained:
     # rtd
     - sphinx >=5.1.0,<6
