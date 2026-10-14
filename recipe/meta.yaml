@@ -1,14 +1,14 @@
 # Dependency chain order: pytensor -> pymc -> pymc-extras
 {% set name = "pytensor" %}
-{% set version = "3.0.4" %}
+{% set version = "3.3.2" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://github.com/pymc-devs/{{ name }}/archive/refs/tags/rel-{{ version }}.tar.gz
-  sha256: 5eba854ff23ae6cd356a12558f9f504406d68d1f8a18f0fa456fb20874744055
+  sha256: 8bea78848359d3c6a22a5c41ca32ebf226bb65e6aae83a866401f2b726035d67
 
 build:
   number: 0
@@ -17,7 +17,7 @@ build:
   entry_points:
     - pytensor-cache = pytensor.bin.pytensor_cache:main
   # upstream requirement
-  skip: true  # [py<311 or py>=315]
+  skip: true  # [py<312 or py>=315]
 
 requirements:
   build:
@@ -31,22 +31,17 @@ requirements:
     - pip
     - numpy {{ numpy }}
     # versioneer[toml]==0.29
-    - versioneer 0.29
+    - versioneer ==0.29
     # Relax the stricter pin on tomli
     - tomli >=2.2.1
     - setuptools >=59.0.0
-    - wheel
   run:
     - python
-    - numpy >=2.0
-    - scipy >=1,<2
-    - numba >=0.58,<=0.65.1
-    - filelock >=3.15
-    - etuples
-    - logical-unification
-    - miniKanren
-    - cons
     - setuptools >=59.0.0
+    - scipy >=1,<2
+    - numpy >=2.0
+    - numba >=0.58,<=0.67.0
+    - filelock >=3.15
     # necessary to compile code at runtime
     - c-compiler
     - cxx-compiler
@@ -58,20 +53,27 @@ test:
   imports:
     - pytensor
     - pytensor.assumptions
+    - pytensor.basic
+    - pytensor.breakpoint
     - pytensor.compile
+    - pytensor.compile.aliasing
     - pytensor.compile.builders
     - pytensor.compile.compiledir
     - pytensor.compile.compilelock
     - pytensor.compile.debug
     - pytensor.compile.debug.debugmode
+    - pytensor.compile.debug.dump
     - pytensor.compile.debug.monitormode
     - pytensor.compile.debug.nanguardmode
     - pytensor.compile.debug.profiling
     - pytensor.compile.executor
+    - pytensor.compile.inner_function
     - pytensor.compile.io
     - pytensor.compile.maker
     - pytensor.compile.mode
     - pytensor.compile.ops
+    - pytensor.compile.rebuild
+    - pytensor.compile.rewriting
     - pytensor.compile.sharedvalue
     - pytensor.configdefaults
     - pytensor.configparser
@@ -88,18 +90,32 @@ test:
     - pytensor.graph.op
     - pytensor.graph.replace
     - pytensor.graph.rewriting
+    - pytensor.graph.traversal
     - pytensor.graph.type
     - pytensor.graph.utils
     - pytensor.ifelse
+    - pytensor.link
     - pytensor.link.basic
     - pytensor.link.c
     - pytensor.link.jax
+    - pytensor.link.jax.dispatch
+    - pytensor.link.jax.dispatch.linalg
+    - pytensor.link.jax.dispatch.signal
     - pytensor.link.mlx
     - pytensor.link.numba
+    - pytensor.link.numba.cache
+    - pytensor.link.numba.dispatch
+    - pytensor.link.numba.dispatch.linalg
+    - pytensor.link.numba.dispatch.signal
+    - pytensor.link.numba.dispatch.sparse
+    - pytensor.link.numba.linker
     - pytensor.link.pytorch.linker
     - pytensor.link.utils
     - pytensor.link.vm
+    - pytensor.misc
+    - pytensor.misc.check_blas
     - pytensor.misc.frozendict
+    - pytensor.misc.may_share_memory
     - pytensor.misc.ordered_set
     - pytensor.misc.pkl_utils
     - pytensor.npy_2_compat
@@ -119,43 +135,73 @@ test:
     - pytensor.scan.views
     - pytensor.sparse
     - pytensor.sparse.basic
+    - pytensor.sparse.linalg
+    - pytensor.sparse.math
+    - pytensor.sparse.rewriting
     - pytensor.sparse.sharedvar
     - pytensor.sparse.type
     - pytensor.sparse.utils
+    - pytensor.sparse.variable
     - pytensor.tensor
     - pytensor.tensor.basic
     - pytensor.tensor.blas
-    - pytensor.tensor.blas_c
-    - pytensor.tensor.blas_headers
+    - pytensor.tensor.blas.blas_c
+    - pytensor.tensor.blas.c_code
+    - pytensor.tensor.blas.c_code.blas_headers
     - pytensor.tensor.blockwise
     - pytensor.tensor.einsum
     - pytensor.tensor.elemwise
+    - pytensor.tensor.elemwise_cgen
     - pytensor.tensor.exceptions
     - pytensor.tensor.extra_ops
+    - pytensor.tensor.fft
+    - pytensor.tensor.fourier
     - pytensor.tensor.functional
     - pytensor.tensor.interpolate
     - pytensor.tensor.linalg
+    - pytensor.tensor.linalg.decomposition
+    - pytensor.tensor.linalg.solvers
     - pytensor.tensor.math
     - pytensor.tensor.nlinalg
+    - pytensor.tensor.optimize
     - pytensor.tensor.pad
     - pytensor.tensor.random
+    - pytensor.tensor.random.rewriting
+    - pytensor.tensor.reshape
     - pytensor.tensor.rewriting
+    - pytensor.tensor.rewriting.linalg
     - pytensor.tensor.shape
     - pytensor.tensor.sharedvar
+    - pytensor.tensor.signal
     - pytensor.tensor.signal.conv
     - pytensor.tensor.slinalg
     - pytensor.tensor.sort
     - pytensor.tensor.special
     - pytensor.tensor.subtensor
+    - pytensor.tensor.symbolic
     - pytensor.tensor.type
     - pytensor.tensor.type_other
     - pytensor.tensor.utils
+    - pytensor.tensor.var
     - pytensor.tensor.variable
+    - pytensor.tensor.xlogx
     - pytensor.typed_list
     - pytensor.typed_list.basic
+    - pytensor.typed_list.rewriting
     - pytensor.typed_list.type
     - pytensor.utils
     - pytensor.xtensor
+    - pytensor.xtensor.basic
+    - pytensor.xtensor.indexing
+    - pytensor.xtensor.linalg
+    - pytensor.xtensor.math
+    - pytensor.xtensor.random
+    - pytensor.xtensor.reduction
+    - pytensor.xtensor.rewriting
+    - pytensor.xtensor.shape
+    - pytensor.xtensor.signal
+    - pytensor.xtensor.type
+    - pytensor.xtensor.vectorization
   requires:
     - pip
     - pytest
@@ -194,3 +240,4 @@ extra:
     - twiecki
   skip-lints:
     - python_build_tools_in_host  # setuptools is a runtime dep per upstream pyproject.toml
+    - host_section_needs_exact_pinnings
